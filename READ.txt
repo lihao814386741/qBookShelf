@@ -1,0 +1,8 @@
+QBookShelf installation
+1.Extract archive.
+2.As simple user.
+
+cd /PATH/QBookShelf/src/
+qmake -project
+qmake
+make

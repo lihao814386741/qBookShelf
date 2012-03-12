@@ -1,0 +1,10 @@
+#! /bin/sh
+
+
+
+for i in $(seq 1 54)
+do
+        echo \<img src=\"幻灯片$i.PNG\" alt=\"\" /\>
+        echo \<br /\>
+done
+
