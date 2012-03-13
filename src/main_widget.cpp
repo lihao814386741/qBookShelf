@@ -14,10 +14,11 @@
     along with QBookShelf.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "main_widget.h"
+#include <qtextcodec.h>
 
 main_widget::main_widget()
 {	
-
+        QTextCodec* pcodec=QTextCodec::codecForName("gb18030") ;
 	text_position = 0; 
 	count_page = 0;
 	resize_b = false;
@@ -44,6 +45,16 @@ main_widget::main_widget()
         background_button->setFixedSize(60, 60);
         about_button->setFixedSize(60, 60);
         font_button->setFixedSize(60, 60);
+
+        move_L_button->setToolTip(pcodec->toUnicode("上一页"));
+        move_R_button->setToolTip(pcodec->toUnicode("下一页"));
+        mark_button->setToolTip(pcodec->toUnicode("标记"));
+        open_button->setToolTip(pcodec->toUnicode("打开文件"));
+        full_screen_button->setToolTip(pcodec->toUnicode("全屏"));
+        background_button->setToolTip(pcodec->toUnicode("设置背景"));
+        about_button->setToolTip(pcodec->toUnicode("作者信息"));
+        font_button->setToolTip(pcodec->toUnicode("设置字体"));
+
 
         QPixmap about_pix("image/about.png");
         about_button->setIcon(about_pix);
