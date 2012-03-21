@@ -26,18 +26,19 @@ main_window::main_window()
 
         create_actions();
 
-        file = menuBar() -> addMenu(tr("&File"));
-        file -> addAction(open_act);
-        file -> addAction(quit_act);
+//        file = menuBar() -> addMenu(tr("&File"));
+//        file -> addAction(open_act);
+//        file -> addAction(quit_act);
 
-        view = menuBar() -> addMenu(tr("&View"));
-        view -> addAction(fullsc_act);
-        view -> addAction(backgr_act);
-        view -> addAction(font_act);
-	view -> addAction(save_label_act);
+//        view = menuBar() -> addMenu(tr("&View"));
+//        view -> addAction(fullsc_act);
+//        view -> addAction(backgr_act);
+//        view -> addAction(font_act);
+//	view -> addAction(save_label_act);
 
-        about = menuBar() -> addMenu(tr("&About"));
-        about -> addAction(about_act);
+//        about = menuBar() -> addMenu(tr("&About"));
+//        about -> addAction(about_act);
+
 
         setCentralWidget(m_win);
 }
@@ -74,6 +75,9 @@ void main_window::create_actions()
         QObject::connect(m_win -> background_button,SIGNAL(clicked()), m_win,SLOT(set_background()));
         QObject::connect(m_win -> font_button,SIGNAL(clicked()), m_win,SLOT(set_font()));
         QObject::connect(m_win -> about_button,SIGNAL(clicked()), this,SLOT(about_dia()));
+        QObject::connect(m_win -> exit_button,SIGNAL(clicked()), this,SLOT(close()));
+        QObject::connect(m_win ->find_button, SIGNAL(clicked()), m_win, SLOT(find_text()));
+
 
 
 }

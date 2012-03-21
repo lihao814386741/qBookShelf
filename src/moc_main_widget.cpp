@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'main_widget.h'
 **
-** Created: Tue Mar 13 18:00:48 2012
+** Created: Thu Mar 22 00:12:42 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_main_widget[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -40,6 +40,8 @@ static const uint qt_meta_data_main_widget[] = {
       95,   93,   12,   12, 0x0a,
      109,   12,   12,   12, 0x0a,
      126,   12,   12,   12, 0x0a,
+     139,   12,   12,   12, 0x0a,
+     151,   12,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -48,7 +50,8 @@ static const char qt_meta_stringdata_main_widget[] = {
     "main_widget\0\0resize_s()\0push_right()\0"
     "push_left()\0mark_selection()\0"
     "open_new_file()\0set_font()\0i\0set_page(int)\0"
-    "set_background()\0save_label()\0"
+    "set_background()\0save_label()\0find_text()\0"
+    "push_find_button()\0"
 };
 
 const QMetaObject main_widget::staticMetaObject = {
@@ -89,9 +92,11 @@ int main_widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 6: set_page((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 7: set_background(); break;
         case 8: save_label(); break;
+        case 9: find_text(); break;
+        case 10: push_find_button(); break;
         default: ;
         }
-        _id -= 9;
+        _id -= 11;
     }
     return _id;
 }

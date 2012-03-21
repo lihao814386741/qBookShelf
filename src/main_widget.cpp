@@ -26,7 +26,7 @@ main_widget::main_widget()
 	spin_box = new QSpinBox(this);
 	spin_box -> setMinimum (1);
 
-	setWindowTitle(tr("QBookShelf"));
+
 
         move_L_button = new QPushButton();
         move_R_button = new QPushButton();
@@ -36,6 +36,8 @@ main_widget::main_widget()
         background_button = new QPushButton();
         font_button = new QPushButton();
         about_button = new QPushButton();
+        exit_button = new QPushButton();
+        find_button = new QPushButton();
 
         move_L_button ->setFixedSize(60, 60);
         move_R_button->setFixedSize(60, 60);
@@ -45,6 +47,8 @@ main_widget::main_widget()
         background_button->setFixedSize(60, 60);
         about_button->setFixedSize(60, 60);
         font_button->setFixedSize(60, 60);
+        exit_button->setFixedSize(60, 60);
+        find_button->setFixedSize(60, 60);
 
         move_L_button->setToolTip(pcodec->toUnicode("上一页"));
         move_R_button->setToolTip(pcodec->toUnicode("下一页"));
@@ -54,6 +58,9 @@ main_widget::main_widget()
         background_button->setToolTip(pcodec->toUnicode("设置背景"));
         about_button->setToolTip(pcodec->toUnicode("作者信息"));
         font_button->setToolTip(pcodec->toUnicode("设置字体"));
+        exit_button->setToolTip(pcodec->toUnicode("退出"));
+        find_button->setToolTip(pcodec->toUnicode("查找字符串"));
+
 
 
         QPixmap about_pix("image/about.png");
@@ -109,10 +116,10 @@ main_widget::main_widget()
 
 	group_widgets();
 	addWindow(virt_viwer);
-      //  addWindow(view, Qt::FramelessWindowHint);
-//        view->setGeometry(219, 9, 1050, 723);
-//        view->move(10, 10);
-        view->hide();
+        //  addWindow(view, Qt::FramelessWindowHint);
+  //        view->setGeometry(219, 9, 1050, 723);
+  //        view->move(10, 10);
+          view->hide();
 	setLayout(main_panel);
 //        this->setStyleSheet("background-image: url(image/main_background.png);background-repeat: none;");
         QObject::connect(page_viwer,SIGNAL(my_resize()),this,SLOT(resize_s()));
@@ -141,11 +148,12 @@ void main_widget::group_widgets()
         controls_panel -> addWidget(background_button);
         controls_panel -> addWidget(font_button);
         controls_panel -> addWidget(mark_button);
+        controls_panel -> addWidget(find_button);
         controls_panel -> addWidget(move_L_button);
 	controls_panel -> addWidget(move_R_button);
         controls_panel -> addWidget(spin_box);
         controls_panel -> addWidget(about_button);
-
+        controls_panel -> addWidget(exit_button);
 
         main_panel = new QHBoxLayout;
 
@@ -291,9 +299,12 @@ void main_widget::page_map()
 	virt_viwer -> hide();
 }
 void main_widget::open_new_file()
-{	
+{
+            qDebug("in open_new_file");
         file_name = (QFileDialog::getOpenFileName(this,"Open Text", file_name, "txt Files (*.txt *.html);;image files (*.jpg *.png *.jpeg)"));
 
+      this->parentWidget()->setWindowTitle(file_name);
+        //        parent->setWindowTitle("lihao");
         if(file_name.contains(".html"))
         {
             virt_viwer->hide();
@@ -310,10 +321,13 @@ void main_widget::open_new_file()
             background_button->setEnabled(false);
             font_button->setEnabled(false);
             spin_box->setEnabled(false);
+            find_button->setEnabled(true);
 
 
+            view->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
+            //view->page()->mainFrame()->setScrollBarValue();
 
-
+            qDebug("max scrollBar %d\n", view->page()->mainFrame()->scrollBarMaximum(Qt::Horizontal));
 //            qDebug("%d\t%d\t%d\t%d\n", page_viwer->x(), page_viwer->y(), page_viwer->width(), page_viwer->height());
 
       }
@@ -331,8 +345,10 @@ void main_widget::open_new_file()
             background_button->setEnabled(true);
             font_button->setEnabled(true);
             spin_box->setEnabled(true);
+            find_button->setEnabled(false);
 
             this->restore_background();
+
         //    page_viwer -> setStyleSheet("background-color: white");
           //  this->restore_settings();
             view->hide();
@@ -352,6 +368,8 @@ void main_widget::open_new_file()
             background_button->setEnabled(false);
             font_button->setEnabled(false);
             spin_box->setEnabled(false);
+            find_button->setEnabled(false);
+
 
             page_viwer -> setStyleSheet("background-image: url("+ file_name +");background-repeat: none;background-position:center;background-attachment:   fixed;background-origin: content;");
         }
@@ -371,6 +389,33 @@ void main_widget::set_font()
 	} else {}
 
 }
+void main_widget::find_text()
+{
+    find_dialog = new QDialog();
+    find_text_edit = new QTextEdit();
+    QHBoxLayout *panel = new QHBoxLayout;
+    QPushButton *search_button = new QPushButton;
+
+    search_button->setText("find");
+
+    panel->addWidget(find_text_edit);
+    panel->addWidget(search_button);
+
+    find_dialog->setLayout(panel);
+
+
+    QObject::connect(search_button,SIGNAL(clicked()), this,SLOT(push_find_button()));
+
+    find_dialog->show();
+}
+void main_widget::push_find_button()
+{
+    qDebug("push Button %s\n", find_text_edit->toPlainText().toStdString().c_str());
+    view->findText(find_text_edit->toPlainText(),  QWebPage::FindWrapsAroundDocument);
+    find_dialog->close();
+}
+
+
 void main_widget::resize_s()
 {
 	resize_b = true;

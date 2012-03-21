@@ -62,7 +62,9 @@ class main_widget: public QWorkspace
 	int l_numb;
 	int r_numb;
 	int text_position;
-
+//Dialog
+        QDialog *find_dialog;
+ //Button
 	QPushButton *move_L_button;
 	QPushButton *move_R_button;
 	QPushButton *mark_button;
@@ -71,6 +73,8 @@ class main_widget: public QWorkspace
         QPushButton *background_button;
         QPushButton *font_button;
         QPushButton *about_button;
+        QPushButton *exit_button;
+        QPushButton *find_button;
 //LABELS
 	QLabel *L_page_number_label;
 	QLabel *R_page_number_label;
@@ -79,6 +83,7 @@ class main_widget: public QWorkspace
         my_qtextedit *page_viwer;
 	my_qtextedit *page_viwer_R;
 	QTextEdit *virt_viwer;
+        QTextEdit *find_text_edit;
 //CURSORS
 	QTextCursor L_cursor;
 	//QTextCursor R_cursor;
@@ -97,10 +102,12 @@ class main_widget: public QWorkspace
         void push_right();
 	void push_left();
 	void mark_selection();
-	void open_new_file();
+        void open_new_file();
 	void set_font();
-	void set_page(int i);
+        void set_page(int i);
 	void set_background();
 	void save_label();
+        void find_text();
+        void push_find_button();
 };
 #endif
