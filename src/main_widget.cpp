@@ -301,19 +301,20 @@ void main_widget::page_map()
 void main_widget::open_new_file()
 {
             qDebug("in open_new_file");
-        file_name = (QFileDialog::getOpenFileName(this,"Open Text", file_name, "txt Files (*.txt *.html);;image files (*.jpg *.png *.jpeg)"));
+      file_name = (QFileDialog::getOpenFileName(this,"Open Text", file_name, "txt Files (*.txt *.html);;image files (*.jpg *.png *.jpeg)"));
 
       this->parentWidget()->setWindowTitle(file_name);
         //        parent->setWindowTitle("lihao");
         if(file_name.contains(".html"))
         {
             virt_viwer->hide();
+            page_viwer->hide();
 
             view->load(file_name);
             view->showFullScreen();
 
 
-            page_viwer->hide();
+
 
             move_L_button ->setEnabled(false);
             move_R_button->setEnabled(false);
@@ -325,10 +326,8 @@ void main_widget::open_new_file()
 
 
             view->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
-            //view->page()->mainFrame()->setScrollBarValue();
 
             qDebug("max scrollBar %d\n", view->page()->mainFrame()->scrollBarMaximum(Qt::Horizontal));
-//            qDebug("%d\t%d\t%d\t%d\n", page_viwer->x(), page_viwer->y(), page_viwer->width(), page_viwer->height());
 
       }
         else if (file_name.contains(".txt"))
@@ -392,7 +391,8 @@ void main_widget::set_font()
 void main_widget::find_text()
 {
     find_dialog = new QDialog();
-    find_text_edit = new QTextEdit();
+    find_text_edit = new QLineEdit();
+
     QHBoxLayout *panel = new QHBoxLayout;
     QPushButton *search_button = new QPushButton;
 
@@ -410,8 +410,8 @@ void main_widget::find_text()
 }
 void main_widget::push_find_button()
 {
-    qDebug("push Button %s\n", find_text_edit->toPlainText().toStdString().c_str());
-    view->findText(find_text_edit->toPlainText(),  QWebPage::FindWrapsAroundDocument);
+    qDebug("push Button %s\n", find_text_edit->text().toStdString().c_str());
+    view->findText(find_text_edit->text(),  QWebPage::FindWrapsAroundDocument);
     find_dialog->close();
 }
 

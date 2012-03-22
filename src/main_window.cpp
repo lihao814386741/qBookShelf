@@ -26,6 +26,21 @@ main_window::main_window()
 
         create_actions();
 
+
+        m_win->virt_viwer->hide();
+        m_win->page_viwer->hide();
+        QString url = QString("./default/default.html");
+
+        m_win ->view->load(url);
+        m_win->view->showFullScreen();
+        m_win->move_L_button ->setEnabled(false);
+        m_win->move_R_button->setEnabled(false);
+        m_win->mark_button->setEnabled(false);
+        m_win->background_button->setEnabled(false);
+        m_win->font_button->setEnabled(false);
+        m_win->spin_box->setEnabled(false);
+        m_win->find_button->setEnabled(true);
+
 //        file = menuBar() -> addMenu(tr("&File"));
 //        file -> addAction(open_act);
 //        file -> addAction(quit_act);

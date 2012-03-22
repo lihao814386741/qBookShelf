@@ -83,7 +83,7 @@ class main_widget: public QWorkspace
         my_qtextedit *page_viwer;
 	my_qtextedit *page_viwer_R;
 	QTextEdit *virt_viwer;
-        QTextEdit *find_text_edit;
+        QLineEdit *find_text_edit;
 //CURSORS
 	QTextCursor L_cursor;
 	//QTextCursor R_cursor;
