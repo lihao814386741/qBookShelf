@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>111.png</file>
+        <file>about.png</file>
+        <file>background.png</file>
+        <file>font.png</file>
+        <file>full.png</file>
+        <file>main_background.png</file>
+        <file>mark.png</file>
+        <file>next.png</file>
+        <file>open.png</file>
+        <file>pre.png</file>
+    </qresource>
+</RCC>

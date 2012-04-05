@@ -19,6 +19,8 @@
 
 int main(int argc, char* argv[])
 {
+
+
         QApplication app(argc, argv);
         QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,QCoreApplication::applicationDirPath());
        // qDebug(QCoreApplication::applicationDirPath().toStdString().c_str());

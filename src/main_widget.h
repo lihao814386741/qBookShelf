@@ -23,6 +23,7 @@
 #include <QtWebKit>
 #include <QToolBar>
 
+
 class main_widget: public QWorkspace
 {
 	Q_OBJECT 
@@ -41,6 +42,7 @@ class main_widget: public QWorkspace
 	void write_settings();
         void write_background();
         void write_font();
+        void display();
         //void rest_position();
 //STRINGS
 	QString R;
@@ -75,6 +77,7 @@ class main_widget: public QWorkspace
         QPushButton *about_button;
         QPushButton *exit_button;
         QPushButton *find_button;
+        QPushButton *test_button;
 //LABELS
 	QLabel *L_page_number_label;
 	QLabel *R_page_number_label;
@@ -96,6 +99,9 @@ class main_widget: public QWorkspace
         QVBoxLayout *controls_panel;
         QHBoxLayout *main_panel;
         QWebView *view;
+//ENCODE
+        QTextCodec* pcodec;
+
 //SLOTS
 	public slots:
         void resize_s();
@@ -109,5 +115,6 @@ class main_widget: public QWorkspace
 	void save_label();
         void find_text();
         void push_find_button();
+        void testthebutton();
 };
 #endif

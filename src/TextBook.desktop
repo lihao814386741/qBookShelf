@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=TextBook
+Exec=/usr/local/bin/TextBook
+Icon=/usr/share/icons/TextBook.png
+Type=Application
+Terminal=false
+StartupNotify=true
+

@@ -3,7 +3,7 @@
 ######################################################################
 QT      +=  webkit network
 TEMPLATE = app
-TARGET = 
+TARGET = TextBook
 DEPENDPATH += .
 INCLUDEPATH += .
 
@@ -14,3 +14,16 @@ SOURCES += main.cpp \
            main_window.cpp \
            my_qtextedit.cpp \
            text_open.cpp
+
+RESOURCES += \
+    image/resources.qrc
+
+
+target.path=/usr/local/bin
+name.files=default
+name.path=/usr/share/TextBook/
+icon.files = TextBook.png
+icon.path = /usr/share/icons/
+desk.files = TextBook.desktop
+desk.path = /usr/share/applications/
+INSTALLS=target name icon desk

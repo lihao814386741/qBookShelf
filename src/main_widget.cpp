@@ -16,9 +16,9 @@
 #include "main_widget.h"
 #include <qtextcodec.h>
 
+
 main_widget::main_widget()
 {	
-        QTextCodec* pcodec=QTextCodec::codecForName("gb18030") ;
 	text_position = 0; 
 	count_page = 0;
 	resize_b = false;
@@ -26,7 +26,7 @@ main_widget::main_widget()
 	spin_box = new QSpinBox(this);
 	spin_box -> setMinimum (1);
 
-
+        pcodec=QTextCodec::codecForName("gb18030");
 
         move_L_button = new QPushButton();
         move_R_button = new QPushButton();
@@ -38,6 +38,7 @@ main_widget::main_widget()
         about_button = new QPushButton();
         exit_button = new QPushButton();
         find_button = new QPushButton();
+        test_button = new QPushButton();
 
         move_L_button ->setFixedSize(60, 60);
         move_R_button->setFixedSize(60, 60);
@@ -49,6 +50,7 @@ main_widget::main_widget()
         font_button->setFixedSize(60, 60);
         exit_button->setFixedSize(60, 60);
         find_button->setFixedSize(60, 60);
+        test_button->setFixedSize(60, 60);
 
         move_L_button->setToolTip(pcodec->toUnicode("上一页"));
         move_R_button->setToolTip(pcodec->toUnicode("下一页"));
@@ -60,6 +62,8 @@ main_widget::main_widget()
         font_button->setToolTip(pcodec->toUnicode("设置字体"));
         exit_button->setToolTip(pcodec->toUnicode("退出"));
         find_button->setToolTip(pcodec->toUnicode("查找字符串"));
+
+        test_button->setText("test");
 
 
 
@@ -101,15 +105,16 @@ main_widget::main_widget()
 	max_pages_label -> setAlignment(Qt::AlignCenter);
 
 	virt_viwer = new QTextEdit();
-	virt_viwer -> setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//        virt_viwer->setReadOnly(true);
+        virt_viwer -> setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 	virt_viwer -> setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
+        virt_viwer->hide();
         //////////////view
         view = new QWebView();
         //////
         page_viwer = new my_qtextedit();
         page_viwer -> setReadOnly(true);
-        page_viwer -> setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        page_viwer -> setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         page_viwer -> setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
         page_viwer_R = new my_qtextedit();
@@ -125,7 +130,7 @@ main_widget::main_widget()
         QObject::connect(page_viwer,SIGNAL(my_resize()),this,SLOT(resize_s()));
 	QObject::connect(move_R_button, SIGNAL(clicked()), this, SLOT(push_right()));
 	QObject::connect(move_L_button, SIGNAL(clicked()), this, SLOT(push_left()));
-	QObject::connect(mark_button, SIGNAL(clicked()), this, SLOT(mark_selection()));
+        QObject::connect(mark_button, SIGNAL(clicked()), this, SLOT(mark_selection()));
 	QObject::connect(spin_box, SIGNAL(valueChanged(int)), this, SLOT(set_page(int)));
 
 }
@@ -139,7 +144,7 @@ void main_widget::group_widgets()
 
         viwers_panel = new QVBoxLayout;
         viwers_panel -> addWidget(view);
-        viwers_panel -> addWidget(page_viwer);
+        viwers_panel -> addWidget(virt_viwer);
 //        view -> resize(1050, 155);
 
         controls_panel = new QVBoxLayout;
@@ -149,8 +154,9 @@ void main_widget::group_widgets()
         controls_panel -> addWidget(font_button);
         controls_panel -> addWidget(mark_button);
         controls_panel -> addWidget(find_button);
-        controls_panel -> addWidget(move_L_button);
-	controls_panel -> addWidget(move_R_button);
+        controls_panel -> addWidget(test_button);
+    //    controls_panel -> addWidget(move_L_button);
+       // controls_panel -> addWidget(move_R_button);
         controls_panel -> addWidget(spin_box);
         controls_panel -> addWidget(about_button);
         controls_panel -> addWidget(exit_button);
@@ -164,7 +170,6 @@ void main_widget::group_widgets()
 }
 void main_widget::packing()
 {
-        virt_viwer ->show();
       //  virt_viwer ->hideEvent();
     //    virt_viwer -> resize(page_viwer->size());
 
@@ -179,7 +184,6 @@ void main_widget::packing()
 
 	R = L_cursor.selectedText();
 
-        virt_viwer -> hide();
         page_viwer -> setText(R);
 
         r_numb = count_page+1;
@@ -223,7 +227,7 @@ void main_widget::push_left()
 void main_widget::mark_selection()
 {
 
-    page_viwer->setTextBackgroundColor(Qt::yellow);
+    virt_viwer->setTextBackgroundColor(Qt::yellow);
     qDebug("start   :%d\n", page_viwer->textCursor().selectionStart());
     qDebug("end     :%d\n", page_viwer->textCursor().selectionEnd());
     qDebug("position:%d\n", page_viwer->textCursor().position());
@@ -243,12 +247,12 @@ int main_widget::line_count()
 }
 int main_widget::max_lines()
 {
-        virt_viwer ->show();
+        //virt_viwer ->show();
         QFontMetrics font_metrics(page_viwer->currentFont());
 	int count =  (int)virt_viwer -> document() -> size().height();
 	int size = (int)font_metrics.height();
 	int page_lines = count / size;
-	virt_viwer -> hide();
+        //virt_viwer -> hide();
 	return page_lines-1;
 }
 void main_widget::page_map()
@@ -275,7 +279,7 @@ void main_widget::page_map()
 		spin_box -> setMaximum(max_p);
 	}
 	page_arr.resize(max_pages);
-        virt_viwer ->show();
+      //  virt_viwer ->show();
 	shift_cursor = virt_viwer->textCursor();
 	int current_pos = text_position;
         shift_cursor.setVisualNavigation(true);
@@ -296,16 +300,22 @@ void main_widget::page_map()
 			break;
 		}
 	}
-	virt_viwer -> hide();
+        //virt_viwer -> hide();
+}
+void main_widget::display()
+{
+    virt_viwer->show();
 }
 void main_widget::open_new_file()
 {
             qDebug("in open_new_file");
-      file_name = (QFileDialog::getOpenFileName(this,"Open Text", file_name, "txt Files (*.txt *.html);;image files (*.jpg *.png *.jpeg)"));
+      file_name = (QFileDialog::getOpenFileName(this,"Open Text", file_name, "txt Files (*.txt *.html *.xhtml);;image files (*.jpg *.png *.jpeg)"));
+
+      pcodec=QTextCodec::codecForName("GBK");
 
       this->parentWidget()->setWindowTitle(file_name);
         //        parent->setWindowTitle("lihao");
-        if(file_name.contains(".html"))
+      if(file_name.contains(".html"))
         {
             virt_viwer->hide();
             page_viwer->hide();
@@ -330,24 +340,33 @@ void main_widget::open_new_file()
             qDebug("max scrollBar %d\n", view->page()->mainFrame()->scrollBarMaximum(Qt::Horizontal));
 
       }
-        else if (file_name.contains(".txt"))
+        else if (file_name.contains(".txt") || file_name.contains(".xhtml"))
         {
             text_position = 0;
             count_page = 0;
-            virt_viwer -> setText(read_text(file_name));
-            page_viwer->show();
-            page_map();
-            packing();
+
+
+            virt_viwer -> setText(tr(read_text(file_name).toStdString().c_str()));
+            //page_viwer->show();
+            //page_viwer->setText(virt_viwer->toPlainText());
+           // page_map();
+            //packing();
+            this->display();
             move_L_button ->setEnabled(true);
             move_R_button->setEnabled(true);
             mark_button->setEnabled(true);
             background_button->setEnabled(true);
             font_button->setEnabled(true);
             spin_box->setEnabled(true);
-            find_button->setEnabled(false);
+            find_button->setEnabled(true);
 
             this->restore_background();
+        //    virt_viwer->verticalScrollBar()->setValue(virt_viwer->verticalScrollBar()->pageStep());
+            virt_viwer -> ensureCursorVisible();
 
+//            virt_viwer->moveCursor();
+
+            qDebug("maxHeight %d\n", virt_viwer->textCursor().anchor());
         //    page_viwer -> setStyleSheet("background-color: white");
           //  this->restore_settings();
             view->hide();
@@ -381,11 +400,9 @@ void main_widget::set_font()
 	if(ok)
 	{
 		virt_viwer -> setFont(my_font);
-                page_viwer -> setFont(my_font);
-		resize_b = true; 
-		packing();
+                resize_b = true;
                 this->write_font();
-	} else {}
+        }
 
 }
 void main_widget::find_text()
@@ -412,6 +429,7 @@ void main_widget::push_find_button()
 {
     qDebug("push Button %s\n", find_text_edit->text().toStdString().c_str());
     view->findText(find_text_edit->text(),  QWebPage::FindWrapsAroundDocument);
+    virt_viwer->find(find_text_edit->text(),  QTextDocument::FindWholeWords);
     find_dialog->close();
 }
 
@@ -472,6 +490,7 @@ void main_widget::restore_background()
 
     bkgr_name = settings.value("bkgr").toString();
     page_viwer -> setStyleSheet("background-image: url("+ bkgr_name +")");
+    virt_viwer -> setStyleSheet("background-image: url("+ bkgr_name +")");
 
 }
 void main_widget::write_settings()
@@ -496,9 +515,9 @@ void main_widget::write_background()
 
 void main_widget::set_background()
 {
-        bkgr_name = (QFileDialog::getOpenFileName(this,"Open Image", bkgr_name, "Jpg Files (*.jpg *.png *.jpeg)"));
-        page_viwer -> setStyleSheet("background-image: url("+ bkgr_name +")");
-        this->write_background();
+    bkgr_name = (QFileDialog::getOpenFileName(this,"Open Image", bkgr_name, "Jpg Files (*.jpg *.png *.jpeg)"));
+    virt_viwer -> setStyleSheet("background-image: url("+ bkgr_name +")");
+    this->write_background();
 
 }
 void main_widget::write_font()
@@ -513,3 +532,36 @@ void main_widget::save_label()
 {
 	qDebug("in widget");
 }
+void main_widget::testthebutton()
+{
+    //向下移动光标
+    //virt_viwer ->moveCursor(QTextCursor::NextBlock);
+
+    //移动光标到指定位置
+    int now = virt_viwer->verticalScrollBar()->sliderPosition();
+    int size = virt_viwer->size().height();
+    qDebug("anchor\t%d\n", now);
+    qDebug("size\t%d\n", size);
+
+
+
+
+    virt_viwer->verticalScrollBar()->setSliderPosition(now + size);
+
+//    virt_viwer->verticalScrollBar()->setSliderDown(true);
+   // virt_viwer->verticalScrollBar()->setSliderDown(false);
+
+    //QSize widget_size = virt_viwer->size();
+
+
+
+
+
+
+
+//    QTextCursor temp_cursor = QTextCursor(virt_viwer->document());
+//    temp_cursor.setPosition(20);
+//    virt_viwer->setTextCursor(temp_cursor);
+
+}
+

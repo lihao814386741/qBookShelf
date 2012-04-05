@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'main_widget.h'
 **
-** Created: Thu Mar 22 09:24:55 2012
+** Created: Thu Apr 5 13:43:54 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_main_widget[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -42,6 +42,7 @@ static const uint qt_meta_data_main_widget[] = {
      126,   12,   12,   12, 0x0a,
      139,   12,   12,   12, 0x0a,
      151,   12,   12,   12, 0x0a,
+     170,   12,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -51,7 +52,7 @@ static const char qt_meta_stringdata_main_widget[] = {
     "push_left()\0mark_selection()\0"
     "open_new_file()\0set_font()\0i\0set_page(int)\0"
     "set_background()\0save_label()\0find_text()\0"
-    "push_find_button()\0"
+    "push_find_button()\0testthebutton()\0"
 };
 
 const QMetaObject main_widget::staticMetaObject = {
@@ -94,9 +95,10 @@ int main_widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 8: save_label(); break;
         case 9: find_text(); break;
         case 10: push_find_button(); break;
+        case 11: testthebutton(); break;
         default: ;
         }
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }

@@ -92,6 +92,8 @@ void main_window::create_actions()
         QObject::connect(m_win -> about_button,SIGNAL(clicked()), this,SLOT(about_dia()));
         QObject::connect(m_win -> exit_button,SIGNAL(clicked()), this,SLOT(close()));
         QObject::connect(m_win ->find_button, SIGNAL(clicked()), m_win, SLOT(find_text()));
+        QObject::connect(m_win -> test_button,SIGNAL(clicked()), m_win,SLOT(testthebutton()));
+
 
 
 
@@ -107,7 +109,7 @@ void main_window::toggle_fullscreen()
                 previous_window_state = this->windowState();
                 this-> setWindowState(Qt::WindowFullScreen);
         }
- //       m_win -> virt_viwer -> resize(m_win -> page_viwer->size());
+        m_win -> virt_viwer -> resize(m_win -> virt_viwer -> size());
         m_win->view->resize(m_win -> page_viwer->size());
         m_win -> resize_s();
 }
