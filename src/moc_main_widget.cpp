@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'main_widget.h'
 **
-** Created: Thu Apr 5 13:43:54 2012
+** Created: Wed Apr 11 18:18:45 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_main_widget[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -41,8 +41,14 @@ static const uint qt_meta_data_main_widget[] = {
      109,   12,   12,   12, 0x0a,
      126,   12,   12,   12, 0x0a,
      139,   12,   12,   12, 0x0a,
-     151,   12,   12,   12, 0x0a,
-     170,   12,   12,   12, 0x0a,
+     155,   12,   12,   12, 0x0a,
+     167,   12,   12,   12, 0x0a,
+     186,   12,   12,   12, 0x0a,
+     202,   12,   12,   12, 0x0a,
+     212,   12,   12,   12, 0x0a,
+     224,   12,   12,   12, 0x0a,
+     240,   12,   12,   12, 0x0a,
+     252,   12,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -51,8 +57,11 @@ static const char qt_meta_stringdata_main_widget[] = {
     "main_widget\0\0resize_s()\0push_right()\0"
     "push_left()\0mark_selection()\0"
     "open_new_file()\0set_font()\0i\0set_page(int)\0"
-    "set_background()\0save_label()\0find_text()\0"
+    "set_background()\0save_label()\0"
+    "restore_label()\0find_text()\0"
     "push_find_button()\0testthebutton()\0"
+    "move_up()\0move_down()\0delete_dialog()\0"
+    "auto_down()\0restore_html_page()\0"
 };
 
 const QMetaObject main_widget::staticMetaObject = {
@@ -93,12 +102,18 @@ int main_widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 6: set_page((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 7: set_background(); break;
         case 8: save_label(); break;
-        case 9: find_text(); break;
-        case 10: push_find_button(); break;
-        case 11: testthebutton(); break;
+        case 9: restore_label(); break;
+        case 10: find_text(); break;
+        case 11: push_find_button(); break;
+        case 12: testthebutton(); break;
+        case 13: move_up(); break;
+        case 14: move_down(); break;
+        case 15: delete_dialog(); break;
+        case 16: auto_down(); break;
+        case 17: restore_html_page(); break;
         default: ;
         }
-        _id -= 12;
+        _id -= 18;
     }
     return _id;
 }

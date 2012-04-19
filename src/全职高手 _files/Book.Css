@@ -1,0 +1,61 @@
+#Ws {
+	width: 100%;
+}
+#Ws #Top {
+	width: 100%;
+}
+#Ws #Top #Menu {
+	height: 30px;
+	background-color:#ffffff;
+}
+#Ws #Top #TextSelect {
+	height: 26px;
+}
+#Ws #Top #AdsT {
+	margin-top: 8px;
+	height: 80px;
+}
+#Ws #Content #TextTitle {
+	height: 26px;
+	margin-top: 10px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+#Ws #Content #BookText {
+	font-size: 11pt;
+	margin-top: 5px;
+	line-height: 180%;
+	text-align: left;
+	width:85%;
+}
+#Ws #Content #EndMenu {
+	height: 20px;
+	margin-top: 10px;
+}
+#Ws #Content hr {
+	color: #cccccc;
+	width: 100%;
+}
+#Ws #Content #LinkMenu {
+	height: 20px;
+	margin-top: 5px;
+}
+#Ws #End {
+    width: 100%;
+}
+#Ws #End #EndType {
+	width: 99%;
+}
+#Ws #End #AdsE {
+	height: 100px;
+}
+#Ws #End #CopyRight {
+	width: 100%;
+}
+#Ws #End #Links {
+	width: 100%;
+}
+#Ws #End hr {
+	color: #cccccc;
+	width: 100%;
+}

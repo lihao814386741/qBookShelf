@@ -29,17 +29,38 @@ main_window::main_window()
 
         m_win->virt_viwer->hide();
         m_win->page_viwer->hide();
-        QString url = QString("./default/default.html");
 
+        {
+        QString url = QString("./default/default.html");
         m_win ->view->load(url);
+        m_win->file_name = url;
         m_win->view->showFullScreen();
-        m_win->move_L_button ->setEnabled(false);
-        m_win->move_R_button->setEnabled(false);
+
+
+
+
+        m_win->move_L_button ->setEnabled(true);
+        m_win->move_R_button->setEnabled(true);
         m_win->mark_button->setEnabled(false);
         m_win->background_button->setEnabled(false);
         m_win->font_button->setEnabled(false);
-        m_win->spin_box->setEnabled(false);
+        //spin_box->setEnabled(false);
         m_win->find_button->setEnabled(true);
+
+
+        m_win->view->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAsNeeded);
+        m_win->restore_page();
+
+
+        }
+//        m_win->view->showFullScreen();
+//        m_win->move_L_button ->setEnabled(false);
+//        m_win->move_R_button->setEnabled(false);
+//        m_win->mark_button->setEnabled(false);
+//        m_win->background_button->setEnabled(false);
+//        m_win->font_button->setEnabled(false);
+//       // m_win->spin_box->setEnabled(false);
+//        m_win->find_button->setEnabled(true);
 
 //        file = menuBar() -> addMenu(tr("&File"));
 //        file -> addAction(open_act);
@@ -84,15 +105,20 @@ void main_window::create_actions()
         fullsc_act -> setShortcut(tr("Ctrl+F"));
         QObject::connect(fullsc_act, SIGNAL(triggered()), this, SLOT(toggle_fullscreen()));
 
-
         QObject::connect(m_win -> open_button,SIGNAL(clicked()), m_win,SLOT(open_new_file()));
         QObject::connect(m_win -> full_screen_button,SIGNAL(clicked()), this,SLOT(toggle_fullscreen()));
         QObject::connect(m_win -> background_button,SIGNAL(clicked()), m_win,SLOT(set_background()));
         QObject::connect(m_win -> font_button,SIGNAL(clicked()), m_win,SLOT(set_font()));
         QObject::connect(m_win -> about_button,SIGNAL(clicked()), this,SLOT(about_dia()));
         QObject::connect(m_win -> exit_button,SIGNAL(clicked()), this,SLOT(close()));
-        QObject::connect(m_win ->find_button, SIGNAL(clicked()), m_win, SLOT(find_text()));
+        QObject::connect(m_win -> find_button, SIGNAL(clicked()), m_win, SLOT(find_text()));
         QObject::connect(m_win -> test_button,SIGNAL(clicked()), m_win,SLOT(testthebutton()));
+        QObject::connect(m_win -> auto_down_button,SIGNAL(clicked()), m_win,SLOT(auto_down()));
+
+        QObject::connect(m_win->view, SIGNAL(loadFinished(bool)), m_win, SLOT(restore_html_page()));
+
+
+
 
 
 
@@ -127,6 +153,7 @@ void main_window::save_size()
 
         settings.setValue("size",this->size());
         m_win -> write_settings();
+
 }
 
 void main_window::restore_size()

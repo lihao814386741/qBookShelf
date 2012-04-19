@@ -1,0 +1,20 @@
+var BgImg = "/Skin/Default/Images/yddh.gif";
+var UserSave = "User/User_BookList.aspx";
+
+function ShowTopMenu(States,HomeTitle,RootUrl,AllUrl,ListUrl,BookUrl,ComUrl,SaveUrl,MarkUrl){
+	document.write('<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td height="8" colspan="9"></td></tr><tr><td height="23" align="left">&nbsp;<a href="'+RootUrl+'">'+HomeTitle+' · 中文原创站点</a></td><td width="86" align="center" background="'+BgImg+'"><a href="'+ListUrl+'">章节目录</a></td><td width="86" align="center" background="'+BgImg+'"><a href="'+SaveUrl+'" target="_blank">加入书架</a></td><td width="86" align="center" background="'+BgImg+'"><a href="'+ComUrl+'" target="_blank">推荐本书</a></td>');
+	if(States==1){
+		document.write('<td width="86" align="center" background="'+BgImg+'"><a href="'+MarkUrl+'" target="_blank"><font color="blue">加入书签</font></a></td>');
+		}
+	document.write('<td width="86" align="center" background="'+BgImg+'"><a href="'+RootUrl+UserSave+'" target="_blank">打开书架</a></td><td width="86" align="center" background="'+BgImg+'"><a href="'+BookUrl+'">返回书页</a></td></tr></table>');
+	}
+function ShowEndMenu(States,RootUrl,AllUrl,ListUrl,BookUrl,ComUrl,SaveUrl,MarkUrl){
+	document.write('<table height="19" cellspacing="0" cellpadding="0" width="100%" border="0"><tbody><tr><td width="100%" align="center"></td><td width="10" valign="center">『</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"></td><td class="tbsep" align="center"></td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="'+ListUrl+'">章节目录</a></td><td class="tbsep" align="center">|</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="'+SaveUrl+'" target="_blank">加入书架</a></td><td class="tbsep" align="center">|</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="'+ComUrl+'" target="_blank">推荐本书</a></td>');
+	if(States==1){
+		document.write('<td class="tbsep" align="center">|</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="'+MarkUrl+'" target="_blank"><font color="blue">加入书签</font></a></td>');	
+		}
+	document.write('<td class="tbsep" align="center">|</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="'+RootUrl+UserSave+'" target="_blank">打开书架</a></td><td class="tbsep" align="center">|</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="'+BookUrl+'">返回书页</a></td><td class="tbsep" align="center">|</td><td class="tb0" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')" align="center" valign="bottom" nowrap="nowrap"><a href="#">Top&nbsp;↑</a></td><td width="10" valign="bottom">』</td></tr></tbody></table>');	
+	}
+function ShowLinkMenu(UpUrl,ListUrl,DownUrl){
+	document.write('<table width="260" height="19" border="0" align="center" cellPadding="0" cellSpacing="0"><tbody><tr><td class="tbsep" align="center">|</td><td class="tb0" align="center" valign="bottom" nowrap="nowrap" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')">'+UpUrl+'</td><td class="tbsep" align="center">|</td><td class="tb0" align="center" valign="bottom" nowrap="nowrap" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')"><a href="'+ListUrl+'">回目录</a></div></td><td class="tbsep" align="center">|</td><td class="tb0" align="center" valign="bottom" nowrap="nowrap" onmouseleave="mhHover(\'tb0\')" onmouseenter="mhHover(\'tb1\')">'+DownUrl+'</div></td><td class="tbsep" align="center">|</td></tr></tbody></table>');
+	}
